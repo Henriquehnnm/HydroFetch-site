@@ -392,6 +392,7 @@ try {
   @media (max-width: 768px) {
     .card:hover {
       transform: translateY(0);
+      border-color: rgba(253, 253, 254, 0.1);
     }
 
     .card a:hover {
@@ -547,6 +548,13 @@ try {
   .contributor-card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-orange);
+  }
+
+  @media (max-width: 768px) {
+    .contributor-card:hover {
+      transform: rotateY(0);
+      border-color: rgba(253, 253, 254, 0.1);
+    }
   }
 
   .avatar {
