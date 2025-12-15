@@ -1,0 +1,86 @@
+---
+const plugins = [
+  {
+    name: "Logos",
+    description:
+      "This README file describes how to add iconic logo support to HydroFetch. It instructs users to download `Logos.json` and place it in the `~/.hydrofetch/Plugins/` directory.",
+    url: "https://github.com/Henriquehnnm/hydrofetch-plugins/tree/main/Logos",
+  },
+];
+---
+
+<section class="extensions">
+  <h1>Extensions</h1>
+  <div class="container">
+    {
+      plugins.map((plugin) => (
+        <div class="card">
+          <h2>{plugin.name}</h2>
+          <p>{plugin.description}</p>
+          <a href={plugin.url} target="_blank" rel="noopener noreferrer">
+            View on GitHub
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .extensions {
+    text-align: center;
+    padding-block: clamp(4rem, 12vh, 10rem);
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 3vh, 2rem);
+    font-weight: bold;
+    color: var(--accent-orange);
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-size: clamp(1rem, 2.8vh, 1.8rem);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    line-height: 1.8;
+    font-weight: 300;
+    display: block;
+    margin-inline: auto;
+    max-width: 80ch;
+    margin-top: 1.5rem;
+  }
+
+  .card a {
+    color: var(--accent-sky);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+    display: inline-block;
+    margin-top: 1rem;
+  }
+
+  .card a:hover {
+    color: var(--accent-indigo);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .card {
+    background-color: var(--bg-tertiary);
+    padding: clamp(20px, 30px, 50px);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    max-width: 90%; /* Adjusted for multiple cards per row */
+    width: 100%;
+    transition: 0.3s ease-in-out;
+  }
+</style>

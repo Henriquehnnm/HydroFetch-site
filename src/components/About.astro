@@ -1,0 +1,615 @@
+---
+const features = [
+  {
+    title: "Pure Fish",
+    description:
+      "No bash hacks. Just clean Fish code you can actually read and modify.",
+    link: "#",
+    linkname: "View source →",
+  },
+  {
+    title: "Config-driven",
+    description:
+      "JSON settings because editing shell vars in 2025 is a thing of the past.",
+    link: "#",
+    linkname: "See Config.json",
+  },
+  {
+    title: "I18n ready",
+    description:
+      "Built-in translation system. Your LANG env var actually matters here.",
+    link: "#",
+    linkname: "Add your language",
+  },
+];
+
+interface Contributor {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
+
+let contributors: Contributor[] = [];
+try {
+  const response = await fetch(
+    "https://api.github.com/repos/Henriquehnnm/HydroFetch/contributors"
+  );
+  if (response.ok) {
+    contributors = await response.json();
+  } else {
+    console.error("Failed to fetch contributors:", response.statusText);
+  }
+} catch (error) {
+  if (error instanceof Error) {
+    console.error("Error fetching contributors:", error.message);
+  } else {
+    console.error("An unknown error occurred:", error);
+  }
+}
+---
+
+<section class="about">
+  <h3 id="about">HydroFetch</h3>
+
+  <h4>A fetch made by a fish user, for fish users</h4>
+  <p>
+    You switched to Fish because bash's syntax is confusing. Why would you run a
+    system information tool written in bash? HydroFetch is pure readable Fish
+    code, easy to hack and it actually makes sense when you open source it.
+  </p>
+
+  <h3 id="install">Installation</h3>
+  <h4>It's simple, and in one line</h4>
+
+  <div class="command">
+    <div class="window">
+      <p class="code">
+        <strong class="purple">curl</strong>
+        <strong class="orange"
+          >-sSL
+          https://raw.githubusercontent.com/Henriquehnnm/HydroFetch/main/install.fish</strong
+        >
+        <strong class="blue">|</strong>
+        <strong class="purple">fish</strong>
+      </p>
+      <button class="copy-button" title="Copy to clipboard">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <h4>Why?</h4>
+  <div class="container">
+    {
+      features.map((feature) => (
+        <div class="card">
+          <h5>{feature.title}</h5>
+          <p>{feature.description}</p>
+          <a href={feature.link}>{feature.linkname}</a>
+        </div>
+      ))
+    }
+  </div>
+
+  <h3>Compare</h3>
+  <h4>Compare and see that HydroFetch is the perfect Fetch for you</h4>
+  <div class="compare">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th><strong class="thtitle">HydroFetch</strong></th>
+            <th>Neofetch</th>
+            <th>Pfetch</th>
+            <th>Screenfetch</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Language</td>
+            <td><span class="green">Fish</span></td>
+            <td><span class="red">Bash</span></td>
+            <td><span class="red">POSIX sh</span></td>
+            <td><span class="red">Bash</span></td>
+          </tr>
+          <tr>
+            <td>Speed</td>
+            <td><span class="green">~30-40ms</span></td>
+            <td><span class="red">~450ms</span></td>
+            <td><span class="yellow">~146ms</span></td>
+            <td><span class="red">~647ms</span></td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td><span class="green">Active</span></td>
+            <td><span class="red">Dead</span></td>
+            <td><span class="green">Active</span></td>
+            <td><span class="yellow">Stale</span></td>
+          </tr>
+          <tr>
+            <td>Config</td>
+            <td><span class="green">JSON</span></td>
+            <td><span class="red">Bash</span></td>
+            <td><span class="yellow">None</span></td>
+            <td><span class="red">Bash</span></td>
+          </tr>
+          <tr>
+            <td>Customizable</td>
+            <td><span class="green">High</span></td>
+            <td><span class="green">High</span></td>
+            <td><span class="red">Minimal</span></td>
+            <td><span class="yellow">Medium</span></td>
+          </tr>
+          <tr>
+            <td>For Fish users</td>
+            <td><span class="green">Native</span></td>
+            <td><span class="red">No</span></td>
+            <td><span class="red">No</span></td>
+            <td><span class="red">No</span></td>
+          </tr>
+          <tr>
+            <td>Dependencies</td>
+            <td><span class="green">fish+jq</span></td>
+            <td><span class="red">Many</span></td>
+            <td><span class="green">Minimal</span></td>
+            <td><span class="red">Many</span></td>
+          </tr>
+          <tr>
+            <td>Maintained</td>
+            <td><span class="green">2025</span></td>
+            <td><span class="red">2024</span></td>
+            <td><span class="green">2025</span></td>
+            <td><span class="red">2019</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="performance">
+    <h4>Performance comparison (higher is better)</h4>
+    <div class="graphic">
+      <div class="bar-container">
+        <span class="bar-label"
+          ><strong class="thtitle">HydroFetch</strong></span
+        >
+        <div class="bar-wrapper">
+          <div class="bar hydro" style="width: 95%;"></div>
+        </div>
+      </div>
+      <div class="bar-container">
+        <span class="bar-label">Pfetch</span>
+        <div class="bar-wrapper">
+          <div class="bar competitor" style="width: 22.7%;"></div>
+        </div>
+      </div>
+      <div class="bar-container">
+        <span class="bar-label">Neofetch</span>
+        <div class="bar-wrapper">
+          <div class="bar competitor" style="width: 7.4%;"></div>
+        </div>
+      </div>
+      <div class="bar-container">
+        <span class="bar-label">Screenfetch</span>
+        <div class="bar-wrapper">
+          <div class="bar competitor" style="width: 5.1%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contributors">
+    <h3>Contributors</h3>
+    <h4>Thanks to everyone who has contributed!</h4>
+    <div class="container">
+      {
+        contributors.length > 0 &&
+          contributors.map((contributor) => (
+            <a
+              href={contributor.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contributor-card"
+            >
+              <img
+                src={contributor.avatar_url}
+                alt={`${contributor.login}'s avatar`}
+                class="avatar"
+              />
+              <span class="contributor-name">{contributor.login}</span>
+            </a>
+          ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: clamp(1.8rem, 3vh, 2rem);
+    font-weight: bold;
+    color: var(--accent-orange);
+    margin-bottom: 1.5rem;
+  }
+
+  h4 {
+    font-size: clamp(0.5rem, 2.3vh, 1.4rem);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    line-height: 1.8;
+    font-weight: 300;
+    display: block;
+    margin-inline: auto;
+    max-width: 80ch;
+    margin-top: 1.5rem;
+  }
+
+  .command {
+    display: flex;
+    justify-content: center;
+  }
+
+  .window {
+    background-color: var(--bg-secondary);
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    border-radius: 0.75rem;
+    padding: clamp(0.1rem, 2vh, 1rem);
+    font-family: "Geist Mono", monospace;
+    max-width: 90%;
+    transition: 0.3s ease-in-out;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .window:hover {
+    border-color: var(--accent-orange);
+  }
+
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--bg-tertiary);
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    border-radius: 0.5rem;
+    color: var(--fg-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.3s,
+      border-color 0.3s;
+  }
+
+  .copy-button:hover {
+    border-color: var(--accent-orange);
+  }
+
+  .copy-button svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+  }
+
+  .command .code {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  strong {
+    font-weight: normal;
+  }
+
+  .purple {
+    color: var(--accent-indigo);
+  }
+
+  .orange {
+    color: var(--accent-orange);
+  }
+
+  .blue {
+    color: var(--accent-sky);
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    background-color: var(--bg-tertiary);
+    padding: clamp(20px, 30px, 50px);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    max-width: 320px;
+    transition: 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-orange);
+  }
+
+  h5 {
+    color: var(--accent-pink);
+    font-size: clamp(1.4rem, 2vh, 1.6rem);
+    margin-block: 0.5em;
+    background: linear-gradient(
+      135deg,
+      var(--accent-orange) 25%,
+      var(--accent-pink) 90%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bolder;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+  }
+
+  .card a {
+    color: var(--accent-sky);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+    display: inline-block;
+    margin-top: 1rem;
+  }
+
+  .card a:hover {
+    color: var(--accent-indigo);
+  }
+
+  @media (max-width: 768px) {
+    .card:hover {
+      transform: translateY(0);
+    }
+
+    .card a:hover {
+      color: var(--accent-sky);
+    }
+  }
+
+  .compare {
+    display: flex;
+    justify-content: center;
+    padding-inline: 1rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    border-radius: 10px;
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .thtitle {
+    background: linear-gradient(
+      135deg,
+      var(--accent-orange) 0%,
+      var(--accent-pink) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bolder;
+  }
+
+  th {
+    padding: 20px;
+    background-color: var(--bg-secondary);
+  }
+
+  td {
+    padding: 20px;
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    background-color: var(--bg-secondary);
+  }
+
+  .table-container::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  .table-container::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+  }
+
+  .table-container::-webkit-scrollbar-thumb {
+    background: var(--accent-sky);
+    border-radius: 10px;
+  }
+
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-indigo);
+  }
+
+  .table-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-sky) var(--bg-primary);
+  }
+
+  .green {
+    color: var(--accent-sky);
+  }
+  .yellow {
+    color: var(--accent-orange);
+  }
+  .red {
+    color: var(--accent-pink);
+  }
+
+  .performance {
+    margin-top: 4rem;
+    padding-inline: 1rem;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .graphic {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .bar-container {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .bar-label {
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .bar-wrapper {
+    background-color: var(--bg-secondary);
+    border-radius: 0.75rem;
+    width: 100%;
+  }
+
+  .bar {
+    height: 30px;
+    border-radius: 0.75rem;
+    transition: width 0.5s ease-in-out;
+  }
+
+  .bar.hydro {
+    background-image: linear-gradient(
+      to right,
+      var(--accent-orange),
+      var(--accent-pink)
+    );
+  }
+
+  .bar.competitor {
+    background-color: var(--bg-tertiary);
+  }
+
+  .contributors {
+    margin-top: 4rem;
+  }
+
+  .contributor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    border-radius: 0.75rem;
+    background-color: var(--bg-tertiary);
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    transition: 0.3s ease-in-out;
+    width: 160px;
+  }
+
+  .contributor-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-orange);
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  .contributor-name {
+    color: var(--fg-primary);
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  small {
+    text-align: left;
+  }
+
+  @media (max-width: 480px) {
+    .bar-container {
+      grid-template-columns: 80px 1fr;
+    }
+
+    .bar {
+      font-size: 0.7rem;
+    }
+  }
+</style>
+
+<script>
+  const copyButton = document.querySelector(".copy-button");
+  const codeElement = document.querySelector(".command .code");
+
+  if (copyButton && codeElement) {
+    copyButton.addEventListener("click", () => {
+      const code = codeElement.innerText;
+
+      navigator.clipboard
+        .writeText(code)
+        .then(() => {
+          copyButton.title = "Copied!";
+          const icon = copyButton.querySelector("svg");
+          if (icon) {
+            icon.innerHTML = `<polyline points="20 6 9 17 4 12"></polyline>`;
+          }
+
+          setTimeout(() => {
+            copyButton.title = "Copy to clipboard";
+            if (icon) {
+              icon.innerHTML = `
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            `;
+            }
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error("Failed to copy text: ", err);
+          copyButton.title = "Failed to copy!";
+          setTimeout(() => {
+            copyButton.title = "Copy to clipboard";
+          }, 2000);
+        });
+    });
+  }
+</script>

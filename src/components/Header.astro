@@ -1,0 +1,238 @@
+---
+const {} = Astro.props;
+---
+
+<header data-scroll-state="top">
+  <a href="/" class="home">HydroFetch</a>
+  <nav class="main-nav">
+    <a href="/#about">About</a>
+    <a href="/#install">Install</a>
+    <a href="/extensions">Extensions</a>
+    <a href="https://github.com/Henriquehnnm/hydrofetch" target="_blank"
+      >Repository</a
+    >
+  </nav>
+
+  <button class="burger-menu-button">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
+  </button>
+</header>
+
+<nav class="birger-menu-overlay">
+  <a href="/#about">About</a>
+  <a href="/#install">Install</a>
+  <a href="/extensions">Extensions</a>
+  <a href="https://github.com/Henriquehnnm/hydrofetch" target="_blank"
+    >Repository</a
+  >
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const burgerMenuButton = document.querySelector(
+      ".burger-menu-button"
+    ) as HTMLElement | null;
+    const birgerMenuOverlay = document.querySelector(
+      ".birger-menu-overlay"
+    ) as HTMLElement | null;
+
+    if (burgerMenuButton && birgerMenuOverlay) {
+      burgerMenuButton.addEventListener("click", () => {
+        birgerMenuOverlay.classList.toggle("is-open");
+        burgerMenuButton.classList.toggle("is-open");
+        document.body.classList.toggle("no-scroll");
+      });
+
+      birgerMenuOverlay.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          birgerMenuOverlay.classList.remove("is-open");
+          burgerMenuButton.classList.remove("is-open");
+          document.body.classList.remove("no-scroll");
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          birgerMenuOverlay.classList.remove("is-open");
+          burgerMenuButton.classList.remove("is-open");
+          document.body.classList.remove("no-scroll");
+        }
+      });
+    }
+
+    const heroSection = document.querySelector(".hero");
+    const header = document.querySelector("header");
+
+    if (heroSection && header) {
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            header.setAttribute("data-scroll-state", "top");
+          } else {
+            header.setAttribute("data-scroll-state", "scrolled");
+          }
+        });
+      }, observerOptions);
+
+      heroObserver.observe(heroSection);
+    }
+  });
+</script>
+
+<style>
+  header {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    border-radius: 1.25rem;
+    border: 1px solid rgba(253, 253, 254, 0.1);
+    background-color: rgba(18, 19, 24, 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1rem;
+
+    transition:
+      transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out;
+  }
+
+  header[data-scroll-state="scrolled"] {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100%);
+    pointer-events: none;
+  }
+
+  header[data-scroll-state="top"] {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: all;
+  }
+
+  header a {
+    margin: 15px 10px 15px 10px;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--fg-primary);
+    transition: 0.3s ease-in-out;
+  }
+
+  header a:hover {
+    color: var(--accent-orange);
+  }
+
+  .home {
+    font-weight: bold;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  .burger-menu-button {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+    margin-left: 15px;
+  }
+
+  .line {
+    width: 2rem;
+    height: 0.25rem;
+    background: var(--fg-primary);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+  }
+
+  .birger-menu-overlay {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(18, 19, 24, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9;
+    overflow-y: auto;
+  }
+
+  .birger-menu-overlay.is-open {
+    display: flex;
+  }
+
+  .birger-menu-overlay a {
+    font-size: 2rem;
+    margin: 1rem 0;
+    color: var(--fg-primary);
+    text-decoration: none;
+  }
+
+  .burger-menu-button.is-open .line:nth-child(1) {
+    transform: rotate(45deg) translate(0px, 0px);
+  }
+
+  .burger-menu-button.is-open .line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .burger-menu-button.is-open .line:nth-child(3) {
+    transform: rotate(-45deg) translate(0px, -0px);
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .main-nav {
+      display: none;
+    }
+
+    .burger-menu-button {
+      display: flex;
+    }
+
+    header {
+      width: auto;
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    header {
+      padding: 0 0.75rem;
+    }
+    .home {
+      margin-right: 10px;
+    }
+  }
+</style>
