@@ -1,18 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap");
 
 :root {
-  --bg-primary: #101010;
-  --bg-secondary: #161616;
-  --bg-tertiary: #1c1c1c;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #171717;
+  --bg-tertiary: #262626;
 
-  --fg-primary: #a0a0a0;
-  --fg-secondary: #7e7e7e;
+  --fg-primary: #fafafa;
+  --fg-secondary: #a1a1a1;
 
   --accent-sky: #85adff;
   --accent-indigo: #ad85ff;
   --accent-pink: #f585ed;
   --accent-orange: #ffbe85;
-  --accent-stone: #808080;
+  --accent-stone: #404040;
   --accent-metal: #fff;
 }
 
